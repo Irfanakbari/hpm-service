@@ -46,7 +46,7 @@ export class HistoriesService {
   async findAll(options: any) {
     try {
       let datas = [];
-      if (options) {
+      if (options.pageNumber > 0) {
         datas = await this.prismaService.history.findMany({
           skip: (options.pageNumber - 1) * parseInt(options.pageSize), // Menghitung berapa data yang harus dilewati (skip)
           take: parseInt(options.pageSize), // Mengambil jumlah data sebanyak yang diinginkan (limit)
