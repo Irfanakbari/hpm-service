@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model history {
+  id          Int      @id @default(autoincrement())
+  id_part     String   @db.VarChar(100)
+  timestamp   DateTime @db.Date
+  barcode_pcc String   @db.VarChar(255)
+  status      String?  @db.VarChar(100)
+  operator    String?  @db.VarChar(50)
+}
+
+model orders {
+  kode        String    @id @db.VarChar(255)
+  part_no     String    @db.VarChar(255)
+  part_name   String?   @db.VarChar(255)
+  part_color  String?   @db.VarChar(100)
+  qty         Int
+  to1         String?   @db.VarChar(50)
+  to2         String?   @db.VarChar(50)
+  date_local  String?   @db.VarChar(100)
+  time_local  String?   @db.VarChar(100)
+  date_export String?   @db.VarChar(100)
+  time_export String?   @db.VarChar(100)
+  weekly      String?   @db.VarChar(100)
+  type_part   String?   @db.VarChar(100)
+  seq_no      String?   @db.VarChar(255)
+  kd_lot_no   String?   @db.VarChar(255)
+  date        String?   @db.VarChar(100)
+  time        DateTime? @db.Time(0)
+  createdAt   DateTime? @default(now())
+}
+
+model emails {
+  id        Int       @id @default(autoincrement())
+  email     String
+  name      String
+  createdAt DateTime? @default(now())
+}
